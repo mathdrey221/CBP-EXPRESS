@@ -10,33 +10,181 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DefinirMotDePasseRouteImport } from './routes/definir-mot-de-passe'
+import { Route as AuthenticatedComptaRouteImport } from './routes/_authenticated/compta'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
+import { Route as AuthenticatedPointsRelaisRouteImport } from './routes/_authenticated/points-relais'
+import { Route as AuthenticatedScanRouteImport } from './routes/_authenticated/scan'
+import { Route as AuthenticatedWhatsappRouteImport } from './routes/_authenticated/whatsapp'
+import { Route as SuiviNumeroRouteImport } from './routes/suivi.$numero'
+import { Route as AuthenticatedColisIndexRouteImport } from './routes/_authenticated/colis.index'
+import { Route as AuthenticatedColisIdRouteImport } from './routes/_authenticated/colis.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DefinirMotDePasseRoute = DefinirMotDePasseRouteImport.update({
+  id: '/definir-mot-de-passe',
+  path: '/definir-mot-de-passe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedComptaRoute = AuthenticatedComptaRouteImport.update({
+  id: '/compta',
+  path: '/compta',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
+  id: '/equipe',
+  path: '/equipe',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPointsRelaisRoute =
+  AuthenticatedPointsRelaisRouteImport.update({
+    id: '/points-relais',
+    path: '/points-relais',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedScanRoute = AuthenticatedScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWhatsappRoute = AuthenticatedWhatsappRouteImport.update({
+  id: '/whatsapp',
+  path: '/whatsapp',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const SuiviNumeroRoute = SuiviNumeroRouteImport.update({
+  id: '/suivi/$numero',
+  path: '/suivi/$numero',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedColisIndexRoute = AuthenticatedColisIndexRouteImport.update({
+  id: '/colis/',
+  path: '/colis/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedColisIdRoute = AuthenticatedColisIdRouteImport.update({
+  id: '/colis/$id',
+  path: '/colis/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/definir-mot-de-passe': typeof DefinirMotDePasseRoute
+  '/compta': typeof AuthenticatedComptaRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/equipe': typeof AuthenticatedEquipeRoute
+  '/points-relais': typeof AuthenticatedPointsRelaisRoute
+  '/scan': typeof AuthenticatedScanRoute
+  '/whatsapp': typeof AuthenticatedWhatsappRoute
+  '/suivi/$numero': typeof SuiviNumeroRoute
+  '/colis/$id': typeof AuthenticatedColisIdRoute
+  '/colis/': typeof AuthenticatedColisIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/definir-mot-de-passe': typeof DefinirMotDePasseRoute
+  '/compta': typeof AuthenticatedComptaRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/equipe': typeof AuthenticatedEquipeRoute
+  '/points-relais': typeof AuthenticatedPointsRelaisRoute
+  '/scan': typeof AuthenticatedScanRoute
+  '/whatsapp': typeof AuthenticatedWhatsappRoute
+  '/suivi/$numero': typeof SuiviNumeroRoute
+  '/colis/$id': typeof AuthenticatedColisIdRoute
+  '/colis': typeof AuthenticatedColisIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/definir-mot-de-passe': typeof DefinirMotDePasseRoute
+  '/_authenticated/compta': typeof AuthenticatedComptaRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
+  '/_authenticated/points-relais': typeof AuthenticatedPointsRelaisRoute
+  '/_authenticated/scan': typeof AuthenticatedScanRoute
+  '/_authenticated/whatsapp': typeof AuthenticatedWhatsappRoute
+  '/suivi/$numero': typeof SuiviNumeroRoute
+  '/_authenticated/colis/$id': typeof AuthenticatedColisIdRoute
+  '/_authenticated/colis/': typeof AuthenticatedColisIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/definir-mot-de-passe'
+    | '/compta'
+    | '/dashboard'
+    | '/equipe'
+    | '/points-relais'
+    | '/scan'
+    | '/whatsapp'
+    | '/suivi/$numero'
+    | '/colis/$id'
+    | '/colis/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/definir-mot-de-passe'
+    | '/compta'
+    | '/dashboard'
+    | '/equipe'
+    | '/points-relais'
+    | '/scan'
+    | '/whatsapp'
+    | '/suivi/$numero'
+    | '/colis/$id'
+    | '/colis'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/definir-mot-de-passe'
+    | '/_authenticated/compta'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/equipe'
+    | '/_authenticated/points-relais'
+    | '/_authenticated/scan'
+    | '/_authenticated/whatsapp'
+    | '/suivi/$numero'
+    | '/_authenticated/colis/$id'
+    | '/_authenticated/colis/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  DefinirMotDePasseRoute: typeof DefinirMotDePasseRoute
+  SuiviNumeroRoute: typeof SuiviNumeroRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +196,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/definir-mot-de-passe': {
+      id: '/definir-mot-de-passe'
+      path: '/definir-mot-de-passe'
+      fullPath: '/definir-mot-de-passe'
+      preLoaderRoute: typeof DefinirMotDePasseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/compta': {
+      id: '/_authenticated/compta'
+      path: '/compta'
+      fullPath: '/compta'
+      preLoaderRoute: typeof AuthenticatedComptaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/equipe': {
+      id: '/_authenticated/equipe'
+      path: '/equipe'
+      fullPath: '/equipe'
+      preLoaderRoute: typeof AuthenticatedEquipeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/points-relais': {
+      id: '/_authenticated/points-relais'
+      path: '/points-relais'
+      fullPath: '/points-relais'
+      preLoaderRoute: typeof AuthenticatedPointsRelaisRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scan': {
+      id: '/_authenticated/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof AuthenticatedScanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/whatsapp': {
+      id: '/_authenticated/whatsapp'
+      path: '/whatsapp'
+      fullPath: '/whatsapp'
+      preLoaderRoute: typeof AuthenticatedWhatsappRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/suivi/$numero': {
+      id: '/suivi/$numero'
+      path: '/suivi/$numero'
+      fullPath: '/suivi/$numero'
+      preLoaderRoute: typeof SuiviNumeroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/colis/': {
+      id: '/_authenticated/colis/'
+      path: '/colis'
+      fullPath: '/colis/'
+      preLoaderRoute: typeof AuthenticatedColisIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/colis/$id': {
+      id: '/_authenticated/colis/$id'
+      path: '/colis/$id'
+      fullPath: '/colis/$id'
+      preLoaderRoute: typeof AuthenticatedColisIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedComptaRoute: typeof AuthenticatedComptaRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
+  AuthenticatedPointsRelaisRoute: typeof AuthenticatedPointsRelaisRoute
+  AuthenticatedScanRoute: typeof AuthenticatedScanRoute
+  AuthenticatedWhatsappRoute: typeof AuthenticatedWhatsappRoute
+  AuthenticatedColisIdRoute: typeof AuthenticatedColisIdRoute
+  AuthenticatedColisIndexRoute: typeof AuthenticatedColisIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedComptaRoute: AuthenticatedComptaRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
+  AuthenticatedPointsRelaisRoute: AuthenticatedPointsRelaisRoute,
+  AuthenticatedScanRoute: AuthenticatedScanRoute,
+  AuthenticatedWhatsappRoute: AuthenticatedWhatsappRoute,
+  AuthenticatedColisIdRoute: AuthenticatedColisIdRoute,
+  AuthenticatedColisIndexRoute: AuthenticatedColisIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  DefinirMotDePasseRoute: DefinirMotDePasseRoute,
+  SuiviNumeroRoute: SuiviNumeroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
