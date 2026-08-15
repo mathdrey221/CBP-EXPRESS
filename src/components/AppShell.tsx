@@ -96,7 +96,18 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+      <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
+        {profile && !profile.actif && (
+          <div className="mb-6 rounded-xl border border-border bg-muted p-4">
+            <p className="text-sm font-semibold text-foreground">Compte en attente d'activation</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Votre inscription est enregistrée. Un administrateur doit activer votre compte et vous
+              attribuer un rôle avant que les données ne s'affichent.
+            </p>
+          </div>
+        )}
+        {children}
+      </main>
     </div>
   );
 }
