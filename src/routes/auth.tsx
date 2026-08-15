@@ -123,26 +123,76 @@ function AuthPage() {
           </div>
           <h2 className="mt-6 text-2xl font-bold">Espace professionnel</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Réservé aux équipes CBP Express. Les comptes sont créés par l'administrateur.
+            {mode === "connexion"
+              ? "Réservé aux équipes CBP Express."
+              : "Créez votre compte agent. Un administrateur l'activera ensuite."}
           </p>
 
-          <form onSubmit={signIn} className="mt-6 space-y-4">
+          <div className="mt-6 grid grid-cols-2 gap-1 rounded-lg bg-muted p-1">
+            <button
+              type="button"
+              onClick={() => setMode("connexion")}
+              className={
+                "rounded-md px-3 py-2 text-sm font-medium transition-colors " +
+                (mode === "connexion" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground")
+              }
+            >
+              Connexion
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("inscription")}
+              className={
+                "rounded-md px-3 py-2 text-sm font-medium transition-colors " +
+                (mode === "inscription" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground")
+              }
+            >
+              Créer un compte
+            </button>
+          </div>
+
+          <form onSubmit={mode === "connexion" ? signIn : signUp} className="mt-6 space-y-4">
+            {mode === "inscription" && (
+              <>
+                <div>
+                  <Label htmlFor="nom">Nom complet</Label>
+                  <Input id="nom" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+                </div>
+                <div>
+                  <Label htmlFor="tel">Téléphone</Label>
+                  <Input id="tel" type="tel" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
+                </div>
+                <div>
+                  <Label htmlFor="ville">Ville</Label>
+                  <Input id="ville" value={ville} onChange={(e) => setVille(e.target.value)} />
+                </div>
+              </>
+            )}
             <div>
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div>
               <Label htmlFor="pwd">Mot de passe</Label>
-              <Input id="pwd" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <Input
+                id="pwd"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete={mode === "connexion" ? "current-password" : "new-password"}
+                required
+              />
             </div>
             <Button type="submit" className="w-full" disabled={busy}>
-              Se connecter
+              {mode === "connexion" ? "Se connecter" : "Créer mon compte"}
             </Button>
           </form>
 
-          <Button variant="link" className="mt-2 w-full" onClick={() => void reset()}>
-            Mot de passe oublié ?
-          </Button>
+          {mode === "connexion" && (
+            <Button variant="link" className="mt-2 w-full" onClick={() => void reset()}>
+              Mot de passe oublié ?
+            </Button>
+          )}
 
           <Button asChild variant="ghost" className="mt-4 w-full">
             <Link to="/">Retour au site public</Link>
